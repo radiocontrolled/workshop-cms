@@ -1,5 +1,6 @@
 var http = require('http');
 var fs = require('fs');
+var querystring =  require('querystring');
 
 function handler (request, response) {
 
@@ -35,6 +36,14 @@ function handler (request, response) {
 
   } 
 
+  else if (endpoint === '/create-post') {
+
+    response.writeHead(300, {"Location": "http://localhost:3000/"});
+    response.write("This is girls");
+    response.end();
+
+  } 
+
   else {
   
 
@@ -63,10 +72,21 @@ function handler (request, response) {
 
   }
 
+  var allTheData = '';
+  request.on('data', function (chunkOfData) {
 
+      allTheData += chunkOfData;
+  });
 
-	
+  request.on('end', function () {
+
+    var convertedData = querystring.parse(allTheData);
+    console.log(convertedData);
+  
+  });
+  
 }
+
 
 
 // var http = require('http');
@@ -96,6 +116,7 @@ var server = http.createServer(handler); // our server
 server.listen(3000, function() {
  console.log("Server is listening on port 3000. ready to accept requests");
 });
+
 
 
 
