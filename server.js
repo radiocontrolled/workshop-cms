@@ -38,9 +38,20 @@ function handler (request, response) {
 
   else if (endpoint === '/create-post') {
 
-    response.writeHead(300, {"Location": "http://localhost:3000/"});
-    response.write("This is girls");
-    response.end();
+    var allTheData = '';
+    
+    request.on('data', function (chunkOfData) {
+      allTheData += chunkOfData;
+    });
+
+    request.on('end', function () {
+      var convertedData = querystring.parse(allTheData);
+      console.log(convertedData);
+      response.writeHead(300, {"Location": "/"});
+      response.write("This is girls");
+      response.end();
+    
+    });
 
   } 
 
@@ -72,18 +83,7 @@ function handler (request, response) {
 
   }
 
-  var allTheData = '';
-  request.on('data', function (chunkOfData) {
 
-      allTheData += chunkOfData;
-  });
-
-  request.on('end', function () {
-
-    var convertedData = querystring.parse(allTheData);
-    console.log(convertedData);
-  
-  });
   
 }
 
