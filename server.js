@@ -63,10 +63,24 @@ function handler (request, response) {
 
   }
 
+  // receiving data from the server 
 
+  // var allTheData = '';
+  // request.on('data', function (chunkOfData) {
 
-	
+  //     allTheData += chunkOfData;
+  // });
+
+  // request.on('end', function () {
+
+  //   console.log(allTheData);
+  //   response.end();
+
+  // });
+
+  
 }
+
 
 
 // var http = require('http');
@@ -96,6 +110,7 @@ var server = http.createServer(handler); // our server
 server.listen(3000, function() {
  console.log("Server is listening on port 3000. ready to accept requests");
 });
+
 
 
 
